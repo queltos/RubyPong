@@ -50,6 +50,8 @@ class Controller
     @objects.make_magic_hooks(	:tick	      => :update,
     				DrawSprites   => :do_draw,
 				UndrawSprites => :do_undraw )
+
+    @background.blit(@screen,[0,0])
   end
   
   def update
@@ -69,14 +71,17 @@ class Controller
   def run
     hook_quit
     loop do
-      @queue << UndrawSprites.new(@screen, @background)
+#      @queue << UndrawSprites.new(@screen, @background)
+      @queue.fetch_sdl_events
+#      @queue << $game.clock.tick
       @queue << DrawSprites.new(@screen)
       @queue.each do |event|
         handle(event)
       end
       fps_update
       draw
-      @screen.flip
+      @screen.update
+#      @screen.flip
       @clock.tick
     end
   end
@@ -85,7 +90,7 @@ class Controller
     exit
   end
   def draw
-    @background.blit(@screen,[0,0])
+#    @background.blit(@screen,[0,0])
   end
 end
 
