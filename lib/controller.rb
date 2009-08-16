@@ -70,6 +70,7 @@ class Controller
     hook_quit
     loop do
       @queue << UndrawSprites.new(@screen, @background)
+      @queue << DrawSprites.new(@screen)
       @queue.each do |event|
         handle(event)
       end

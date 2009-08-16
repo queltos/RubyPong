@@ -4,6 +4,6 @@ class GameObject
   def initialize filename
     super()
     @image = Surface.load(filename)
-    @rect = Rect.new(0,0,@image.size)
+    @rect = Rect.new(50,50,@image.size)
   end
 end
